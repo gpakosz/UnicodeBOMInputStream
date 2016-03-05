@@ -123,9 +123,10 @@ public class UnicodeBOMInputStream extends InputStream
 
   } // BOM
 
+  
   /**
    * Constructs a new <code>UnicodeBOMInputStream</code> that wraps the
-   * specified <code>InputStream</code>.
+   * specified <code>InputStream</code>. By default BOM bytes are skipped
    *
    * @param inputStream an <code>InputStream</code>.
    *
@@ -135,6 +136,23 @@ public class UnicodeBOMInputStream extends InputStream
    * when trying to detect the Unicode BOM.
    */
   public UnicodeBOMInputStream(final InputStream inputStream) throws  NullPointerException,
+                                                                      IOException {
+    this(inputStream, true);
+  }
+  
+  /**
+   * Constructs a new <code>UnicodeBOMInputStream</code> that wraps the
+   * specified <code>InputStream</code>.
+   *
+   * @param inputStream an <code>InputStream</code>.
+   * @param skipIfFound skip the BOM if it's founded
+   *
+   * @throws NullPointerException when <code>inputStream</code> is
+   * <code>null</code>.
+   * @throws IOException on reading from the specified <code>InputStream</code>
+   * when trying to detect the Unicode BOM.
+   */
+  public UnicodeBOMInputStream(final InputStream inputStream, boolean skipIfFound) throws  NullPointerException,
                                                                       IOException
   {
     if (inputStream == null)
@@ -197,6 +215,9 @@ public class UnicodeBOMInputStream extends InputStream
 
     if (read > 0)
       in.unread(bom, 0, read);
+    if (skipIfFound && getBOM() != BOM.NONE) {
+      skipBOM();
+    }
   }
 
   /**
