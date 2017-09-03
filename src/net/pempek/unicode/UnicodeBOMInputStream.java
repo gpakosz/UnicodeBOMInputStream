@@ -230,26 +230,20 @@ public class UnicodeBOMInputStream extends InputStream
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int read() throws IOException
   {
     return in.read();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int read(final byte b[]) throws  IOException,
                                           NullPointerException
   {
     return in.read(b, 0, b.length);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int read(final byte b[],
                   final int off,
                   final int len) throws IOException,
@@ -258,49 +252,37 @@ public class UnicodeBOMInputStream extends InputStream
     return in.read(b, off, len);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long skip(final long n) throws IOException
   {
     return in.skip(n);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int available() throws IOException
   {
     return in.available();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void close() throws IOException
   {
     in.close();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public synchronized void mark(final int readlimit)
   {
     in.mark(readlimit);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public synchronized void reset() throws IOException
   {
     in.reset();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean markSupported()
   {
     return in.markSupported();
